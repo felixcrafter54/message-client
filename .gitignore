@@ -1,0 +1,12 @@
+/.venv
+/build
+/config.json
+/MessageClient copy 2.py
+/MessageClient copy 3.py
+/MessageClient copy 4.py
+/MessageClient copy.py
+/MessageClient.spec
+/shortcut.py
+/test_file.py
+/toast_test.py
+/__pycache__
