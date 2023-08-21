@@ -30,7 +30,7 @@ VSVersionInfo(
       [
       StringTable(
         u'040904B0',
-        [StringStruct(u'CompanyName', u''),
+        [StringStruct(u'CompanyName', u'Felix Noster'),
         StringStruct(u'FileDescription', u'Message-Client'),
         StringStruct(u'FileVersion', u'1.3.0.0'),
         StringStruct(u'InternalName', u''),
