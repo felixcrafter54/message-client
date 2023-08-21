@@ -5,5 +5,6 @@ pyinstaller_versionfile.create_versionfile(
     version="1.3",
     product_name="Message-Client",
     file_description="Message-Client",
-    legal_copyright="MIT License Copyright (c) 2023 Felix felixcrafter54@gmail.com"
+    legal_copyright="MIT License Copyright (c) 2023 Felix felixcrafter54@gmail.com",
+    company_name="Felix Noster"
     )
