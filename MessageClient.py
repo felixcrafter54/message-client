@@ -15,6 +15,7 @@ from modules.functions import resource_path, hash_password
 from modules.toast_messages import show_toast
 from modules.autostart import create_shortcut
 from modules.command import execute_command
+from modules.processes import check_process_running
 
 config = None
 
@@ -105,13 +106,17 @@ class RequestHandler(BaseHTTPRequestHandler):
     def do_AUTHHEAD(self,response):
         self.send_response(401)
         self.send_header("WWW-Authenticate", 'Basic realm="Auth required"')
-        self.send_header("Content-type", "text/html")
+        self.send_header("Content-type", "text/plain")
         self.send_header("Content-Length", str(len(response)))
         self.end_headers()
 
-    def do_RESPONSE(self,response):
+    def do_RESPONSE(self,response,option = 0):
+        if option == 1:
+            ct = 'application/json'
+        else:
+            ct = 'text/plain'    
         self.send_response(200)
-        self.send_header("Content-type", "text/html")
+        self.send_header("Content-type", ct)
         self.send_header("Content-Length", str(len(response)))
         self.end_headers()
         self.wfile.write(response) 
@@ -149,6 +154,11 @@ class RequestHandler(BaseHTTPRequestHandler):
                     redirect_stdout("hotkey: " + payload)
                     response = b"Hotkey pressed"
                     self.do_RESPONSE(response)
+                elif type == "process":
+                    output = check_process_running(payload)
+                    redirect_stdout("process: " + payload)
+                    response = bytes(output, "utf-8")
+                    self.do_RESPONSE(response,1) # e.g. {"process": "opera", "status": false}
                 else:
                     response = b"incorrect Message type"
                     self.do_RESPONSE(response)    
