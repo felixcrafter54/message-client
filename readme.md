@@ -77,7 +77,7 @@ Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
     HTTP/1.1 200 OK
     Content-Type: text/plain
     
-    e.g. 'Message Received', 'Command executed, no generated output' or 'Hotkey pressed'
+    'Message Received', 'Command executed, no generated output' or 'Hotkey pressed'
     ```
 
 * process:
@@ -85,7 +85,7 @@ Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
     HTTP/1.1 200 OK
     Content-Type: application/json
     
-    e.g. {"process": "opera", "status": false}
+    {"process": "opera", "status": false}
     ```
 
 ## System Tray Icon
