@@ -77,7 +77,7 @@ Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
     HTTP/1.1 200 OK
     Content-Type: text/plain
     
-    'Message Received', 'Command executed, no generated output' or 'Hotkey pressed'
+    'Response'
     ```
 
 * process:
