@@ -77,7 +77,7 @@ Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
     HTTP/1.1 200 OK
     Content-Type: text/plain
     
-    'Response'
+    Response
     ```
 
 * process:
