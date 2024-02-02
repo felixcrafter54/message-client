@@ -222,7 +222,7 @@ def create_gui():
 
     # GUI-Elements
     tk.Label(window, text="Username:").grid(row=0, column=0)
-    username_entry = tk.Entry(window)
+    username_entry = tk.Entry(window, name = "username")
     username_entry.grid(row=1, column=0)
 
     value = BooleanVar(window, value=False)
