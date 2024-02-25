@@ -32,6 +32,7 @@ Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
 }
 ```
 
+---
 Sending a command:
 
 ```http
@@ -44,6 +45,7 @@ Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
 }
 ```
 
+---
 Sending a hotkey:
 
 ```http
@@ -58,6 +60,7 @@ Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
 
 Possible Hotkeys: [List of hotkeys](keylist.txt)
 
+---
 Retrieving Process Information:
 
 ```http
@@ -69,7 +72,7 @@ Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
   "payload": "chrome"
 }
 ```
-
+---
 Execute a system function:
 
 ```http
