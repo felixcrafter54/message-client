@@ -82,7 +82,7 @@ Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
 }
 ```
 
-Possible functions: [standby,lock,shutdown,reboot]
+Possible functions: [standby, lock, shutdown, reboot]
 
 ## Responses from the client
 
@@ -101,6 +101,14 @@ Possible functions: [standby,lock,shutdown,reboot]
     
     {"process": "opera", "status": false}
     ```
+
+* systemfunction:
+    ```http
+    HTTP/1.1 200 OK
+    Content-Type: text/plain
+    
+    Systemfunction executed
+    ```    
 
 ## System Tray Icon
 
