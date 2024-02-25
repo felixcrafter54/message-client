@@ -164,7 +164,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                     output = execute_systemfunction(payload)
                     redirect_stdout("Systemfunction: " + payload)
                     response = bytes(output, "utf-8")
-                    self.de_RESPONSE(response)
+                    self.do_RESPONSE(response)
                 else:
                     response = b"incorrect Message type"
                     self.do_RESPONSE(response)    
