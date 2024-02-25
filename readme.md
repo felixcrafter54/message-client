@@ -70,6 +70,20 @@ Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
 }
 ```
 
+Execute a system function:
+
+```http
+POST http://localhost:8080/
+Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
+
+{
+  "type": "systemfunction",
+  "payload": "lock"
+}
+```
+
+Possible functions: [standby,lock,shutdown,reboot]
+
 ## Responses from the client
 
 * message, command and hotkey:
