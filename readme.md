@@ -72,6 +72,7 @@ Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
   "payload": "chrome"
 }
 ```
+
 ---
 Execute a system function:
 
