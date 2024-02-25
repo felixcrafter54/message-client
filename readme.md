@@ -111,7 +111,7 @@ Possible functions: [standby, lock, shutdown, reboot]
     HTTP/1.1 200 OK
     Content-Type: text/plain
     
-    Systemfunction executed
+    Systemfunction executing
     ```    
 
 ## System Tray Icon
