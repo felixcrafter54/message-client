@@ -16,6 +16,7 @@ from modules.toast_messages import show_toast
 from modules.autostart import create_shortcut
 from modules.command import execute_command
 from modules.processes import check_process_running
+from modules.systemfunction import execute_systemfunction
 
 config = None
 
@@ -97,7 +98,7 @@ def redirect_stdout(text):
         console_output.insert(tk.END, "\n".join(last_messages))
         console_output.see(tk.END)
 
-# Klasse für den HTTP-Server
+# Class for the HTTP-Server
 class RequestHandler(BaseHTTPRequestHandler):
 
     def log_message(self, format: str, *args: Any) -> None:
@@ -159,6 +160,11 @@ class RequestHandler(BaseHTTPRequestHandler):
                     redirect_stdout("process: " + payload)
                     response = bytes(output, "utf-8")
                     self.do_RESPONSE(response,1) # e.g. {"process": "opera", "status": false}
+                elif type == "systemfunction":
+                    output = execute_systemfunction(payload)
+                    redirect_stdout("Systemfunction: " + payload)
+                    response = bytes(output, "utf-8")
+                    self.de_RESPONSE(response)
                 else:
                     response = b"incorrect Message type"
                     self.do_RESPONSE(response)    
