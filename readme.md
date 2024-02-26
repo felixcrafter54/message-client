@@ -125,6 +125,6 @@ To uninstall the Message Client, simply delete the MessageClient.exe file from y
 The Message Client was inspired by the need for a simple messaging and command execution platform and is built on various Python libraries.
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the GPL-3.0 License.
 
 Feel free to contribute or report issues if you find any improvements or bugs! Happy messaging!
