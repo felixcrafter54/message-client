@@ -86,7 +86,7 @@ Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
 }
 ```
 
-Possible functions: [standby, lock, shutdown, reboot]
+Possible functions: [standby, lock, shutdown, reboot, screen_on, screen_off]
 
 ## Responses from the client
 
