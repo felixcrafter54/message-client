@@ -124,6 +124,9 @@ To uninstall the Message Client, simply delete the MessageClient.exe file from y
 ## Acknowledgments
 The Message Client was inspired by the need for a simple messaging and command execution platform and is built on various Python libraries.
 
+## Make EXE File:
+pyinstaller --onefile  --noconsole --version-file "versionfile.txt" --icon "app_icon.ico" --add-data "app_icon.ico;." --add-data "toast_logo.png;." .\MessageClient.py
+
 ## License
 This project is licensed under the GPL-3.0 License.
 
