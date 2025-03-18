@@ -235,7 +235,7 @@ def create_gui():
     if config_loaded != None:
         value = BooleanVar(window, value=config_loaded.get("autostart") if "autostart" in config_loaded else False)
 
-    tk.Label(window, text="v1.8").grid(row=0, column=2)
+    tk.Label(window, text="v1.9").grid(row=0, column=2)
 
     tk.Checkbutton(window, text="Autostart", variable=value, onvalue=True, offvalue=False, command=lambda: autostart(value.get())).grid(row=2, column=2)
 
