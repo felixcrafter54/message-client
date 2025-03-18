@@ -16,9 +16,9 @@ def execute_systemfunction(function):
     elif function == "lock":
         run_thread_delayed(lambda: ctypes.windll.user32.LockWorkStation())
     elif function == "shutdown":
-        run_thread_delayed(lambda: os.system("shutdown /s /t 0"))
+        run_thread_delayed(lambda: os.system("shutdown /s /f /t 0"))
     elif function == "reboot":
-        run_thread_delayed(lambda: os.system("shutdown /r /t 0"))
+        run_thread_delayed(lambda: os.system("shutdown /r /f /t 0"))
     elif function == "screen_on":
         #run_thread_delayed(lambda: screen_on())
         screen_on()
