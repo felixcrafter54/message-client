@@ -2,6 +2,8 @@ from windows_toasts import Toast, ToastDisplayImage, WindowsToaster
 
 from modules.functions import resource_path
 
+import winrt.windows.foundation.collections  # Fix for PyInstaller
+
 # show toast notification
 def show_toast(message):
     toaster = WindowsToaster("Message-Client")
