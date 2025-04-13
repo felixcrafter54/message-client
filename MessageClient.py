@@ -14,9 +14,11 @@ from modules.keypress import press_hotkey
 from modules.functions import resource_path, hash_password
 from modules.toast_messages import show_toast
 from modules.autostart import create_shortcut
-from modules.command import execute_command
+from modules.command import execute_command, execute_command_detached
 from modules.processes import check_process_running
 from modules.systemfunction import execute_systemfunction
+
+version = "v2.0"
 
 config = None
 
@@ -36,7 +38,7 @@ def load_config():
 # save hasched config
 def save_config(new_config):
     global config
-    if new_config is str:
+    if isinstance(new_config, str):
         new_config = json.loads(new_config)
     config = new_config
     with open("config.json", "w") as file:
@@ -52,14 +54,16 @@ password_entry = None
 
 window = None
 
-value = None
+autostart_var = None
+
+tray_icon = None
 
 isshown = False
 
 config_loaded = load_config()
 
 exe_path = sys.argv[0]
-autostart_folder = os.path.join(os.getenv('APPDATA'),'Microsoft\Windows\Start Menu\Programs\Startup')
+autostart_folder = os.path.join(os.getenv('APPDATA'), r'Microsoft\Windows\Start Menu\Programs\Startup')
 
 def autostart(Flag):
     data = load_config()
@@ -150,6 +154,11 @@ class RequestHandler(BaseHTTPRequestHandler):
                     redirect_stdout("command: " + payload)
                     response = bytes(output, "utf-8")
                     self.do_RESPONSE(response)
+                elif type == "command_detached":
+                    output = execute_command_detached(payload)
+                    redirect_stdout("command_detached: " + payload)
+                    response = bytes(output, "utf-8")
+                    self.do_RESPONSE(response)
                 elif type == "hotkey":
                     press_hotkey(payload)
                     redirect_stdout("hotkey: " + payload)
@@ -182,7 +191,7 @@ def start_http_server():
 
 # Main function for GUI
 def create_gui():
-    global console_output, username_entry, password_entry, window, config_loaded, value, isshown
+    global console_output, username_entry, password_entry, window, config_loaded, autostart_var, isshown
 
     def quit_all():
         window.destroy()
@@ -194,7 +203,7 @@ def create_gui():
     def show_window(icon):
         global isshown
         icon.stop()
-        window.after(0,window.deiconify())
+        window.after(0, window.deiconify)
         # delete Textbox and show last messages
         console_output.delete(1.0, tk.END)
         console_output.insert(tk.END, "\n".join(last_messages))
@@ -203,13 +212,16 @@ def create_gui():
 
     # Hide the window and show on the system taskbar
     def hide_window():
-        global isshown
+        global isshown, tray_icon
         isshown = False
         window.withdraw()
-        image=Image.open(resource_path("app_icon.ico"))
-        menu=(item('Quit', quit_window), item('Show', show_window))
-        icon=pystray.Icon("name", image, "Message-Client", menu)
-        icon.run()
+        image = Image.open(resource_path("app_icon.ico"))
+        menu = (
+            item('Quit', quit_window),
+            item('Show', show_window)
+        )
+        tray_icon = pystray.Icon("name", image, "Message-Client", menu)
+        tray_icon.run()
 
     def save_credentials():
         new_config = {
@@ -221,9 +233,10 @@ def create_gui():
         messagebox.showinfo("Success", "Credentials saved successfully.")
 
     window = tk.Tk()
+
     window.title("Message-Client")
-    image=Image.open(resource_path("app_icon.ico"))
-    photo = ImageTk.PhotoImage(image)
+    icon_image = Image.open(resource_path("app_icon.ico"))
+    photo = ImageTk.PhotoImage(icon_image)
     window.wm_iconphoto(False, photo)
 
     # GUI-Elements
@@ -231,13 +244,13 @@ def create_gui():
     username_entry = tk.Entry(window, name = "username")
     username_entry.grid(row=1, column=0)
 
-    value = BooleanVar(window, value=False)
-    if config_loaded != None:
-        value = BooleanVar(window, value=config_loaded.get("autostart") if "autostart" in config_loaded else False)
+    autostart_var = BooleanVar(window, value=False)
+    if config_loaded is not None and "autostart" in config_loaded:
+        autostart_var.set(config_loaded["autostart"])
 
-    tk.Label(window, text="v1.9").grid(row=0, column=2)
+    tk.Label(window, text=version).grid(row=0, column=2)
 
-    tk.Checkbutton(window, text="Autostart", variable=value, onvalue=True, offvalue=False, command=lambda: autostart(value.get())).grid(row=2, column=2)
+    tk.Checkbutton(window, text="Autostart", variable=autostart_var, onvalue=True, offvalue=False, command=lambda: autostart(autostart_var.get())).grid(row=2, column=2)
 
     tk.Label(window, text="Password:").grid(row=2, column=0)
     password_entry = tk.Entry(window, show="*")

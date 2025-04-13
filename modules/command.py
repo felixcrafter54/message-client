@@ -10,3 +10,10 @@ def execute_command(command):
             return output
     except subprocess.CalledProcessError as e:
         return f"Error: {e.output}"
+    
+def execute_command_detached(command):
+    try:
+        subprocess.Popen(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        return f"Command started (detached): {command}"
+    except Exception as e:
+        return f"Error: {str(e)}"

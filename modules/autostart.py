@@ -5,7 +5,7 @@ import os
 import sys
 
 exe_path = sys.argv[0]
-autostart_folder = os.path.join(os.getenv('APPDATA'),'Microsoft\Windows\Start Menu\Programs\Startup')
+autostart_folder = os.path.join(os.getenv('APPDATA'),r'Microsoft\Windows\Start Menu\Programs\Startup')
 
 def create_shortcut(target_path, shortcut_path, description="", icon_path="", working_directory=""):
     try:
