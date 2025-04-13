@@ -20,7 +20,7 @@ To send messages, commands, and hotkeys to the client, you can use HTTP POST req
 
 ### Examples
 
-Sending a message:
+#### Sending a message:
 
 ```http
 POST http://localhost:8080/
@@ -33,7 +33,8 @@ Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
 ```
 
 ---
-Sending a command:
+
+#### Sending a command (Synchronous Execution)
 
 ```http
 POST http://localhost:8080/
@@ -45,8 +46,28 @@ Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
 }
 ```
 
+- Executes the command **synchronously**.
+- Returns the console output directly as the response.
+
 ---
-Sending a hotkey:
+
+#### Sending a command (Detached Execution)
+
+```http
+POST http://localhost:8080/
+Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
+
+{
+  "type": "command_detached",
+  "payload": "start notepad"
+}
+```
+
+- Executes the command **in the background (detached)**.
+- No console output is returned, only a confirmation message.
+---
+
+#### Sending a hotkey:
 
 ```http
 POST http://localhost:8080/
@@ -61,7 +82,8 @@ Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
 Possible Hotkeys: [List of hotkeys](keylist.txt)
 
 ---
-Retrieving Process Information:
+
+#### Retrieving Process Information:
 
 ```http
 POST http://localhost:8080/
@@ -74,7 +96,8 @@ Authorization: Basic BASE64_ENCODED_USERNAME_AND_PASSWORD
 ```
 
 ---
-Execute a system function:
+
+#### Execute a system function:
 
 ```http
 POST http://localhost:8080/
